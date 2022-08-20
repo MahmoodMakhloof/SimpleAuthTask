@@ -8,15 +8,15 @@ class AppPreferences {
   AppPreferences(this._sharedPreferences);
 
   //* User Name Prefs
-  Future<String?> getUserName() async {
+  String? getUserName()  {
     return _sharedPreferences.getString(PREF_KEY_USER_NAME);
   }
 
-  Future<void> setUserName(String userName) async {
+  setUserName(String userName)  {
     _sharedPreferences.setString(PREF_KEY_USER_NAME, userName);
   }
 
-  Future<void> clearUserName() async {
+   clearUserName()  {
     _sharedPreferences.remove(PREF_KEY_USER_NAME);
   }
 
@@ -25,11 +25,11 @@ class AppPreferences {
     return _sharedPreferences.getString(PREF_KEY_TOKEN);
   }
 
-  Future<void> setToken(String token) async {
+   setToken(String token)  {
     _sharedPreferences.setString(PREF_KEY_TOKEN, token);
   }
 
-  Future<void> clearToken() async {
+   clearToken()  {
     _sharedPreferences.remove(PREF_KEY_TOKEN);
   }
 }

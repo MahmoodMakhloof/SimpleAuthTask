@@ -1,4 +1,4 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:data_connection_checker_nulls/data_connection_checker_nulls.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_auth/core/app_prefs.dart';
@@ -30,20 +30,37 @@ Future<void> initAppModule() async {
   // app service client
   final dio = await instance<DioFactory>().getDio();
   instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
+    
 
   //* Repos
+
   setRepos();
 
   //* BLOCS
   setBlocs();
 }
 
-setBlocs() {
-  instance.registerFactory<AuthCubit>(() => AuthCubit());
-  instance.registerFactory<HomeCubit>(() => HomeCubit());
+setRepos() {
+  instance.registerLazySingleton<AuthRepository>(
+      () => AuthRepository(instance(), instance()));
+  instance.registerLazySingleton<ProblemsRepository>(
+      () => ProblemsRepository(instance(), instance()));
 }
 
-setRepos() {
-  instance.registerLazySingleton<AuthRepository>(() => AuthRepository(instance(), instance()));
-  instance.registerLazySingleton<ProblemsRepository>(() => ProblemsRepository(instance(), instance()));
+setBlocs() {
+  instance.registerLazySingleton<AuthCubit>(() => AuthCubit(
+        instance(),
+        instance(),
+        
+      ));
+  instance.registerLazySingleton<HomeCubit>(() => HomeCubit(instance()));
 }
+
+
+
+ resetModules()  {
+  instance.reset(dispose: false);
+  initAppModule();
+}
+
+

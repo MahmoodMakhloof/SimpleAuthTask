@@ -20,5 +20,5 @@ abstract class AppServiceClient {
 
   //* Problems
   @GET("problems")
-  Future<ProblemsResponse>getProblems();
+  Future<MyDataResponse>getProblems();
 }

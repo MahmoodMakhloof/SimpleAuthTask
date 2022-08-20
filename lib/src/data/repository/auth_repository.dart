@@ -11,11 +11,11 @@ class AuthRepository {
   final AppServiceClient _appServiceClient;
 
   AuthRepository(this._networkInfo, this._appServiceClient);
-  Future<Either<Failure, AuthenticationResponse>> login(String username, String password)async {
+  Future<Either<Failure, AuthenticationResponse>> login(String email, String password)async {
     if (await _networkInfo.isConnected) {
       try {
         // safe to call APIs
-        final response = await _appServiceClient.login(username,password);
+        final response = await _appServiceClient.login(email,password);
         if (response.status == ApiInternalStatus.SUCCESS) {
           // success
           // return data

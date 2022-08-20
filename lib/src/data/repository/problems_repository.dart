@@ -12,7 +12,7 @@ class ProblemsRepository {
   final AppServiceClient _appServiceClient;
 
   ProblemsRepository(this._networkInfo, this._appServiceClient);
-  Future<Either<Failure, ProblemsResponse>> getProblems()async {
+  Future<Either<Failure, MyDataResponse>> getProblems()async {
     if (await _networkInfo.isConnected) {
       try {
         // safe to call APIs

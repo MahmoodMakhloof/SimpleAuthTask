@@ -34,18 +34,18 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<ProblemsResponse> getProblems() async {
+  Future<MyDataResponse> getProblems() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ProblemsResponse>(
+        _setStreamType<MyDataResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'problems',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProblemsResponse.fromJson(_result.data!);
+    final value = MyDataResponse.fromJson(_result.data!);
     return value;
   }
 
